@@ -59,18 +59,3 @@ searchbtn.addEventListener('click', (event) => {
   }
 });
 });
-// carddiv.innerHTML += `
-// <div class="card">
-   
-//         <div class="img">
-//             <img src="${e.img}" alt="" srcset="" width="100%">
-//         </div>
-//         <div id="ststename">${e.loc}</div>
-//         <div class="HoverCard">
-//             <div id="total-Confirmed"></div>
-//             <div id="confirmed-CasesIndian">Confirmed (Indian): ${e.confirmedCasesIndian}</div>
-//             <div id="Discharged"></div>
-//             <div id="Deaths"></div>
-//         </div>
-
-//     </div>`
