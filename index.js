@@ -1,44 +1,42 @@
 let searchbtn = document.getElementById('search');
 let searchBar = document.getElementById('searchBar');
 let body = document.getElementById('root');
-
+let carddiv = document.getElementById('cardsection');
 let mapdata;  // Make mapdata globally accessible
+
+let totalCon = document.getElementById('total-Confirmed');
+let confirmedindian = document.getElementById('confirmed-CasesIndian');
+let Discharged = document.getElementById('Discharged');
+let Deaths = document.getElementById('Deaths');
+let cityname = document.getElementById('ststename');
+let photos = document.getElementById('photos');
+let headingone = document.getElementById('infotext');
+let headingtwo = document.getElementById('infotext-two');
+let headingthree = document.getElementById('infotext-three');
 
 // Fetch data from db.json
 fetch('db.json')
   .then((res) => res.json())
   .then((data) => {
   mapdata = data.data.regional;  
+console.log(data.data.summary);
 
-   Cards(mapdata);  
-  });
+  let topdata=data.data.summary
 
-function Cards(data) {
-  body.innerHTML = '';  
 
-  data.forEach((e) => {
-    body.innerHTML += `
-      <div class="map">
-        <div class="stateimg">
-          <img src="${e.img}" alt="${e.loc}" width="90%" height="80%">
-        </div>
-        <div id="state_name">
-          <h2>${e.loc}</h2>
-        </div>
-        <div class="About">
-        <div class="aboutsecond">
-          <div id="total-Confirmed">Total Confirmed: ${e.totalConfirmed}</div>
-          <div id="confirmed-CasesIndian">Confirmed (Indian): ${e.confirmedCasesIndian}</div>
-          <div id="Discharged">Discharged: ${e.discharged}</div>
-          <div id="Deaths">Deaths: ${e.deaths}</div>
-        </div>
-        </div>
-      </div>`;
-  });
-}
+ headingone.textContent=topdata.total
+ headingtwo.textContent=topdata.discharged
+ headingthree.textContent=topdata.deaths
+
+
+// console.log(ele);
+
+
+
 
 searchbtn.addEventListener('click', (event) => {
   event.preventDefault();
+
 
   let userInput = searchBar.value.toLowerCase();
   console.log(userInput);
@@ -49,6 +47,30 @@ searchbtn.addEventListener('click', (event) => {
   if (result.length === 0) {
     body.innerHTML = `<span style="color: red"> Not Found </span>`;
   } else {
-    Cards(result);  
+    result.forEach((e)=>{
+      photos.src=e.img
+      cityname.textContent=e.loc
+      totalCon.textContent=`totalConfirmed${e.totalConfirmed}`
+      confirmedindian.textContent=`Confirmed ${e.confirmedCasesIndian}`
+      Discharged.textContent=`Discharged:${e.discharged}`
+      Deaths.textContent=`Deaths:${e.deaths}`
+
+    })  
   }
 });
+});
+// carddiv.innerHTML += `
+// <div class="card">
+   
+//         <div class="img">
+//             <img src="${e.img}" alt="" srcset="" width="100%">
+//         </div>
+//         <div id="ststename">${e.loc}</div>
+//         <div class="HoverCard">
+//             <div id="total-Confirmed"></div>
+//             <div id="confirmed-CasesIndian">Confirmed (Indian): ${e.confirmedCasesIndian}</div>
+//             <div id="Discharged"></div>
+//             <div id="Deaths"></div>
+//         </div>
+
+//     </div>`
